@@ -20,34 +20,40 @@
     #bands {
       list-style: inside square;
       font-size: 20px;
-      background: white;
+      background: rgba(0, 0, 0, 0.222);
+      
+      color: white;
       width: 500px;
       margin: auto;
       padding: 0;
-      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+      /* box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05); */
+      
     }
     
     #bands li {
-      border-bottom: 1px solid #efefef;
+      
       padding: 20px;
+      list-style: none;
     }
     
     #bands li:last-child {
       border-bottom: 0;
     }
 
-    a {
-      color: #ffc600;
-      text-decoration: none;
-    }
 
   </style>
 
   <ul id="bands"></ul>
 
 <script>
-const bands = ['A Day To Remember', 'I Prevail', 'Pierce the Veil', 'Motionless in White', 'Our Hollow Our Home', 'Oceans Ate Alaska', 'Point North', 'We Came as Romans', 'Driveways', 'The Amity Affliction', 'Attack Attack!', 'Beartooth', 'Of Mice & Men'];
+    function strip(bandName){
+        return bandName.replace(/^(a |the |an )/i, '').trim();
+    }
+const bands = ['A Day To Remember', 'I Prevail', 'Hands Like Houses', 'Motionless in White', 'Our Hollow Our Home', 'Oceans Ate Alaska', 'Point North', 'We Came as Romans', 'Driveways', 'The Amity Affliction', 'Attack Attack!', 'Beartooth', 'Of Mice & Men'];
 
+const sortedBands = bands.sort((a, b) =>  strip(a) > strip(b) ? 1 : -1);
+
+document.querySelector('#bands').innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('');
 
 </script>
 
